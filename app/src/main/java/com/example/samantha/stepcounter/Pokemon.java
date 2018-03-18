@@ -1,48 +1,27 @@
 package com.example.samantha.stepcounter;
 
-import java.util.Random;
-
 /**
  * Created by samantha on 18/03/18.
  */
 
-public class Pokemon {
+public interface Pokemon {
+    public String name = "";
+    public String type = "";
 
-    private static final String[] pokemon = {
-        "Charmander",
-        "Bulbasaur",
-        "Squirtle"
-    };
+    public int level = 0;
+    public int exp = 0;
 
-    public String name;
-    public String type;
-    public int level;
-    public String[] moves;
-    public int exp;
+    public Moves[] moves = {};
 
-    public Pokemon() {
-        // needs to be redone so that a random type isn't assigned to a random pokemon
-        Random rand = new Random();
-        int randNum = rand.nextInt(pokemon.length);
-        this.name = pokemon[randNum];
-
-        randNum = rand.nextInt(Types.pokemon.length);
-        this.type = Types.pokemon[randNum];
-
-        this.level = 2;
-        this.exp = 0;
+    public int hp = 0;
+    public int att = 0;
+    public int special = 0;
+    public int def = 0;
 
         // So I need to differentiate this by type... I guess I need a moves class?
         // How should I set that up? I don't need to be creating new moves. I need a set number of moves already created from which to choose,
         // based on having a matching/compatible type with this pokemon.
         // Should I have a moves class, with predefined types, names, pp, and power?
         // Should I create these move objects immediately upon loading the game?
-        this.moves = new String[4];
 
-        this.moves[0] = "move 1";
-        this.moves[1] = "move 2";
-        this.moves[2] = "move 3";
-        this.moves[3] = "move 4";
-    }
-
-}
+    public void levelUp();
