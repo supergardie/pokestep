@@ -137,6 +137,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+
+    // STEP EVENTS
+    // Battle (wild or trainer), found item, found city
+
     public void battle() {
         randNum = rand.nextInt(2) + 1;
 
@@ -150,7 +154,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void trainerBattle() {
-        TvNotice.setText("You're in a trainer battle with " + trainerTypes[rand.nextInt(trainerTypes.length)] + " " + trainerNames[rand.nextInt(trainerNames.length)] + "!");
+        Trainer trainer = new Trainer();
+        TvNotice.setText("You're in a trainer battle with " + trainer.name + "!\n");
+        TvNotice.append(trainer.name + " has these pokemon: ");
+
+        for (int ii = 0; ii < trainer.pokemon.length; ii++) {
+            TvNotice.append(trainer.pokemon[ii]+ ", ");
+        }
     }
 
     public void wildBattle() {
@@ -160,6 +170,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void foundItem() {
         TvNotice.setText("You found an item!\nTap next!");
     }
+
+    public void foundCity() {
+
+    }
+
+
+
 
     public void startCounter() {
         randNum = rand.nextInt(10) + 1;
