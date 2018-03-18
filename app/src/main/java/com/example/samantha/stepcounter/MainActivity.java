@@ -14,21 +14,20 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener {
     private TextView TvSteps;
     private TextView TvNotice;
+    private TextView TvTotalSteps;
     private StepDetector simpleStepDetector;
     private SensorManager sensorManager;
     private Sensor accel;
     private static final String TEXT_NUM_STEPS = "Number of Steps: ";
+    private static final String TEXT_TOTAL_STEPS = "Total steps: ";
     private int numSteps;
-    private int totalSteps;
+    private int totalSteps = 0;
     private int randNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Initialise total steps
-        totalSteps = 0;
 
         // Get an instance of the SensorManager
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -38,9 +37,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         TvSteps = (TextView) findViewById(R.id.tv_steps);
         TvNotice = (TextView) findViewById(R.id.tv_notice);
+        TvTotalSteps = (TextView) findViewById(R.id.tv_totalSteps);
         Button BtnStart = (Button) findViewById(R.id.btn_start);
         Button BtnStop = (Button) findViewById(R.id.btn_stop);
 
+        TvTotalSteps.setText(TEXT_TOTAL_STEPS + totalSteps);
 
 
         BtnStart.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +84,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void step(long timeNs) {
-         numSteps++;
+        numSteps++;
+        totalSteps++;
         TvSteps.setText(TEXT_NUM_STEPS +  numSteps);
+        TvTotalSteps.setText(TEXT_TOTAL_STEPS + totalSteps);
     }
 
     public void checkForStepEvent() {
