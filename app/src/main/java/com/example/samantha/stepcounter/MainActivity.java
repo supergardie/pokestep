@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener {
     private TextView TvSteps;
@@ -18,12 +19,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Sensor accel;
     private static final String TEXT_NUM_STEPS = "Number of Steps: ";
     private int numSteps;
+    private int totalSteps;
+    private int randNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialise total steps
+        totalSteps = 0;
 
         // Get an instance of the SensorManager
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -42,9 +47,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View arg0) {
-
-                numSteps = 0;
+                Random rand = new Random();
+                randNum = rand.nextInt(10) + 5;
+                 numSteps = 0;
                 sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
+                TvNotice.setText("Random number is " + randNum);
 
             }
         });
@@ -56,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void onClick(View arg0) {
 
                 sensorManager.unregisterListener(MainActivity.this);
+                TvNotice.setText("");
 
             }
         });
@@ -76,16 +84,31 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             simpleStepDetector.updateAccel(
                     event.timestamp, event.values[0], event.values[1], event.values[2]);
         }
+
+        checkForStepEvent();
     }
 
     @Override
     public void step(long timeNs) {
-        numSteps++;
-        TvSteps.setText(TEXT_NUM_STEPS + numSteps);
+         numSteps++;
+        TvSteps.setText(TEXT_NUM_STEPS +  numSteps);
+    }
 
-        if(numSteps == 5) {
-            TvNotice.setText("You reached 5 steps!");
+    public void checkForStepEvent() {
+
+        if( numSteps == randNum &&  numSteps % 2 == 0) {
+            battle();
+        } else if( numSteps == randNum) {
+            foundItem();
         }
+    }
+
+    public void battle() {
+        TvNotice.setText("You're in a battle!");
+    }
+
+    public void foundItem() {
+        TvNotice.setText("You found an item!");
     }
 
 }
