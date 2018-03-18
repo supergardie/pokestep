@@ -12,12 +12,6 @@ public final class Types {
             "Youngster"
     };
 
-    public final static String[] pokemon = {
-            "fire",
-            "water",
-            "grass"
-    };
-
     private Types(){
         // static!
     }

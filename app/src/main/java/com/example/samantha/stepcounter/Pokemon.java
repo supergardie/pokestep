@@ -6,7 +6,6 @@ package com.example.samantha.stepcounter;
 
 public abstract class Pokemon {
     public String name;
-    public String type;
 
     public int level;
     public int exp;
@@ -15,7 +14,6 @@ public abstract class Pokemon {
 
     public int hp;
     public int att;
-    public int special;
     public int def;
 
     // So I need to differentiate this by type... I guess I need a moves class?
