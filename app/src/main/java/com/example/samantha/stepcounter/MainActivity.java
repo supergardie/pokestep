@@ -15,11 +15,42 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView TvSteps;
     private TextView TvNotice;
     private TextView TvTotalSteps;
+
     private StepDetector simpleStepDetector;
     private SensorManager sensorManager;
     private Sensor accel;
+
+    Random rand = new Random();
+
     private static final String TEXT_NUM_STEPS = "Number of Steps: ";
     private static final String TEXT_TOTAL_STEPS = "Total steps: ";
+
+    private String[] trainerTypes = {
+            "Biker",
+            "Bird Keeper",
+            "Blackbelt",
+            "Bug Catcher",
+            "Cooltrainer",
+            "Fisher",
+            "Hiker",
+            "Psychic",
+            "Rocker",
+            "Youngster"
+    };
+
+    private String[] trainerNames = {
+            "Joey",
+            "Claire",
+            "Ash",
+            "Misty",
+            "Brock",
+            "Joy",
+            "Oak",
+            "Sabrina",
+            "Gary",
+            "Erika"
+    };
+
     private int numSteps;
     private int totalSteps = 0;
     private int randNum;
@@ -107,16 +138,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void battle() {
-        Random rand = new Random();
         randNum = rand.nextInt(2) + 1;
 
         if(randNum % 2 == 0) {
-            TvNotice.setText("You're in a trainer battle!");
+            wildBattle();
         } else {
-            TvNotice.setText("You're in a wild battle!");
+            trainerBattle();
         }
 
         TvNotice.append("\nTap next!");
+    }
+
+    public void trainerBattle() {
+        TvNotice.setText("You're in a trainer battle with " + trainerTypes[rand.nextInt(10) + 1] + " " + trainerNames[rand.nextInt(10) + 1] + "!");
+    }
+
+    public void wildBattle() {
+        TvNotice.setText("You're in a wild battle!");
     }
 
     public void foundItem() {
@@ -124,7 +162,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void startCounter() {
-        Random rand = new Random();
         randNum = rand.nextInt(10) + 5;
         numSteps = 0;
         sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
