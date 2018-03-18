@@ -47,12 +47,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View arg0) {
-                Random rand = new Random();
-                randNum = rand.nextInt(10) + 5;
-                 numSteps = 0;
-                sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
-                TvNotice.setText("Random number is " + randNum);
-
+                startCounter();
             }
         });
 
@@ -62,9 +57,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View arg0) {
 
-                sensorManager.unregisterListener(MainActivity.this);
-                TvNotice.setText("");
-
+                restartCounter();
             }
         });
 
@@ -96,19 +89,40 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public void checkForStepEvent() {
 
-        if( numSteps == randNum &&  numSteps % 2 == 0) {
-            battle();
-        } else if( numSteps == randNum) {
-            foundItem();
+        if(numSteps == randNum) {
+            if(numSteps % 2 == 0) {
+                battle();
+            } else {
+                foundItem();
+            }
+
+            // Stop counting steps until event is over and user taps the Next button
+            // Walking while using your phone is dangerous, kids!
+            sensorManager.unregisterListener(MainActivity.this);
         }
+
     }
 
     public void battle() {
-        TvNotice.setText("You're in a battle!");
+        TvNotice.setText("You're in a battle!\nTap next!");
     }
 
     public void foundItem() {
-        TvNotice.setText("You found an item!");
+        TvNotice.setText("You found an item!\nTap next!");
+    }
+
+    public void startCounter() {
+        Random rand = new Random();
+        randNum = rand.nextInt(10) + 5;
+        numSteps = 0;
+        sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
+        TvNotice.setText("Random number is " + randNum);
+    }
+
+    public void restartCounter() {
+        TvNotice.setText("");
+
+        startCounter();
     }
 
 }
