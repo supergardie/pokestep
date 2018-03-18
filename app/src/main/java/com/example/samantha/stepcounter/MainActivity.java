@@ -107,7 +107,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void battle() {
-        TvNotice.setText("You're in a battle!\nTap next!");
+        Random rand = new Random();
+        randNum = rand.nextInt(2) + 1;
+
+        if(randNum % 2 == 0) {
+            TvNotice.setText("You're in a trainer battle!");
+        } else {
+            TvNotice.setText("You're in a wild battle!");
+        }
+
+        TvNotice.append("\nTap next!");
     }
 
     public void foundItem() {
