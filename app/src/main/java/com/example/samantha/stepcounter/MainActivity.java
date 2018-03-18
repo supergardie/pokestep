@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void trainerBattle() {
-        TvNotice.setText("You're in a trainer battle with " + trainerTypes[rand.nextInt(10) + 1] + " " + trainerNames[rand.nextInt(10) + 1] + "!");
+        TvNotice.setText("You're in a trainer battle with " + trainerTypes[rand.nextInt(trainerTypes.length)] + " " + trainerNames[rand.nextInt(trainerNames.length)] + "!");
     }
 
     public void wildBattle() {
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void startCounter() {
-        randNum = rand.nextInt(10) + 5;
+        randNum = rand.nextInt(10) + 1;
         numSteps = 0;
         sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
         TvNotice.setText("Random number is " + randNum);
