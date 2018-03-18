@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public void restartCounter() {
         TvNotice.setText("");
+        TvSteps.setText(TEXT_NUM_STEPS + 0);
 
         startCounter();
     }
