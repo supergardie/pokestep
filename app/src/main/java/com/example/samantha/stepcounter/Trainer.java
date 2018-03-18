@@ -8,13 +8,6 @@ import java.util.Random;
 
 public class Trainer {
 
-    private static final String[] trainerTypes = {
-            "Fire Trainer",
-            "Water Trainer",
-            "Grass Trainer",
-            "Youngster"
-    };
-
     private static final String[] trainerNames = {
             "Brock",
             "Misty",
@@ -36,7 +29,7 @@ public class Trainer {
         Random rand = new Random();
         int randNum = rand.nextInt(4);
 
-        this.type = trainerTypes[randNum];
+        this.type = Types.trainers[randNum];
 
         randNum = rand.nextInt(10);
 
