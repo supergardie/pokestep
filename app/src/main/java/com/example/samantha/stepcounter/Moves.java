@@ -5,4 +5,8 @@ package com.example.samantha.stepcounter;
  */
 
 public class Moves {
+    public String name;
+    public String type;
+    public int pp;
+    public int power;
 }

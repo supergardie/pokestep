@@ -27,7 +27,7 @@ public class Trainer {
 
     public Trainer() {
         Random rand = new Random();
-        int randNum = rand.nextInt(4);
+        int randNum = rand.nextInt(Types.trainers.length);
 
         this.type = Types.trainers[randNum];
 

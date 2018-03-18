@@ -173,7 +173,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void wildBattle() {
-        TvNotice.setText("You're in a wild battle!");
+        Pokemon wildPokemon = new Pokemon();
+        TvNotice.setText("A wild " + wildPokemon.name + " appeared!");
     }
 
     public void foundItem() {

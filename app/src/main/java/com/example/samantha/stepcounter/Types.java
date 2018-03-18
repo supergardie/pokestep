@@ -6,9 +6,9 @@ package com.example.samantha.stepcounter;
 
 public final class Types {
     public final static String[] trainers = {
-            "Fire Trainer",
-            "Water Trainer",
-            "Grass Trainer",
+            "FireTrainer",
+            "WaterTrainer",
+            "GrassTrainer",
             "Youngster"
     };
 

@@ -7,11 +7,6 @@ import java.util.Random;
  */
 
 public class Pokemon {
-    private static final String[] types = {
-        "Water",
-        "Grass",
-        "Fire"
-    };
 
     private static final String[] pokemon = {
         "Charmander",
@@ -26,12 +21,13 @@ public class Pokemon {
     public int exp;
 
     public Pokemon() {
+        // needs to be redone so that a random type isn't assigned to a random pokemon
         Random rand = new Random();
-        int randNum = rand.nextInt(pokemon.length - 1) + 1;
+        int randNum = rand.nextInt(pokemon.length);
         this.name = pokemon[randNum];
 
-        randNum = rand.nextInt(types.length - 1) + 1;
-        this.type = types[randNum];
+        randNum = rand.nextInt(Types.pokemon.length);
+        this.type = Types.pokemon[randNum];
 
         this.level = 2;
         this.exp = 0;
