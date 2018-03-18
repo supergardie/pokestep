@@ -47,5 +47,8 @@ public class Trainer {
         this.pokemon[0] = "Charmander";
         this.pokemon[1] = "Squirtle";
         this.pokemon[2] = "Bulbasaur";
+
+        randNum = rand.nextInt(400) + 100;
+        this.money = randNum;
     }
 }

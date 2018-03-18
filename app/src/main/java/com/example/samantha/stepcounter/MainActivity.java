@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private int numSteps;
     private int totalSteps = 0;
     private int randNum;
+    private int money = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,8 +160,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TvNotice.append(trainer.name + " has these pokemon: ");
 
         for (int ii = 0; ii < trainer.pokemon.length; ii++) {
-            TvNotice.append(trainer.pokemon[ii]+ ", ");
+            TvNotice.append(trainer.pokemon[ii]);
+
+            if(ii == trainer.pokemon.length - 1) {
+                TvNotice.append(".\n");
+            } else {
+                TvNotice.append(", ");
+            }
         }
+
+        TvNotice.append("You will get $" + trainer.money + " from this trainer!");
     }
 
     public void wildBattle() {
