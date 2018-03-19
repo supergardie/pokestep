@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener {
+    private boolean start = true;
     private TextView TvSteps;
     private TextView TvNotice;
     private TextView TvTotalSteps;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             "Erika"
     };
 
+    private Player player;
     private int numSteps;
     private int totalSteps = 0;
     private int randNum;
@@ -70,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TvSteps = (TextView) findViewById(R.id.tv_steps);
         TvNotice = (TextView) findViewById(R.id.tv_notice);
         TvTotalSteps = (TextView) findViewById(R.id.tv_totalSteps);
-        Button BtnStart = (Button) findViewById(R.id.btn_start);
-        Button BtnStop = (Button) findViewById(R.id.btn_stop);
+        final Button BtnStart = (Button) findViewById(R.id.btn_start);
+//        Button BtnStop = (Button) findViewById(R.id.btn_stop);
 
         TvTotalSteps.setText(TEXT_TOTAL_STEPS + totalSteps);
 
@@ -80,19 +82,29 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View arg0) {
-                startCounter();
+
+                if(start) {
+                    start = !start;
+                    player = new Player("Sam", new PokeCharmander());
+                    TvNotice.setText("Hello " + player.name + "! You are starting with a " + player.pokemon[0].name + ".\n");
+
+                    startCounter();
+                    BtnStart.setText("Next");
+                } else {
+                    restartCounter();
+                }
             }
         });
 
 
-        BtnStop.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-                restartCounter();
-            }
-        });
+//        BtnStop.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//
+//                restartCounter();
+//            }
+//        });
 
 
 
@@ -157,24 +169,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void trainerBattle() {
         Trainer trainer = new Trainer();
         TvNotice.setText("You're in a trainer battle with " + trainer.name + "!\n");
-        TvNotice.append(trainer.name + " has these pokemon: ");
-
-//        for (int ii = 0; ii < trainer.pokemon.length; ii++) {
-//            TvNotice.append(trainer.pokemon[ii]);
-//
-//            if(ii == trainer.pokemon.length - 1) {
-//                TvNotice.append(".\n");
-//            } else {
-//                TvNotice.append(", ");
-//            }
-//        }
-
         TvNotice.append("You will get $" + trainer.money + " from this trainer!");
     }
 
     public void wildBattle() {
 //        Pokemon wildPokemon = new Pokemon();
-//        TvNotice.setText("A wild " + wildPokemon.name + " appeared!");
+        PokeCharmander wildPokemon = new PokeCharmander();
+        TvNotice.setText("A wild " + wildPokemon.name + " appeared!\n");
+        TvNotice.append("HP: " + wildPokemon.hp + "\n");
+        TvNotice.append("Level: " + wildPokemon.level + "\n");
+
+        if(player.pokemon[0].currentHP > 0 && wildPokemon.currentHP > 0) {
+            wildPokemon.takeDamage(player.pokemon[0].att);
+            TvNotice.append("Damage: " + player.pokemon[0].att);
+            TvNotice.append("HP: " + wildPokemon.currentHP);
+        }
     }
 
     public void foundItem() {
@@ -195,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         randNum = rand.nextInt(10) + 1;
         numSteps = 0;
         sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
-        TvNotice.setText("Random number is " + randNum);
+        TvNotice.append("Steps to next objective:  " + randNum);
     }
 
     public void restartCounter() {

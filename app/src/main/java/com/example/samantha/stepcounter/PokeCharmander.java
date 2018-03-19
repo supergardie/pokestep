@@ -27,12 +27,4 @@ public class PokeCharmander extends Pokemon {
         randNum = rand.nextInt(9) + 2;
         this.level = randNum;
     }
-
-    public void takeDamage(int attack) {
-        this.currentHP -= attack;
-    }
-
-    public void heal() {
-        this.currentHP = this.hp;
-    }
 }

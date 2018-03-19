@@ -31,7 +31,7 @@ public class Trainer {
 
         this.type = Types.trainers[randNum];
 
-        randNum = rand.nextInt(10);
+        randNum = rand.nextInt(trainerNames.length);
 
         this.name = String.format("%s %s", this.type, trainerNames[randNum]);
 

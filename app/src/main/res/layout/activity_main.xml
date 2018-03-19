@@ -19,15 +19,15 @@
         android:id="@+id/btn_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start Pedometer"
+        android:text="Start"
         />
 
-    <Button
-        android:id="@+id/btn_stop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Next"
-        />
+    <!--<Button-->
+        <!--android:id="@+id/btn_stop"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Next"-->
+        <!--/>-->
 
     <TextView
         android:id="@+id/tv_notice"

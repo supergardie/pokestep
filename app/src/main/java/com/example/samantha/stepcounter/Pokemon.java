@@ -26,11 +26,11 @@ public abstract class Pokemon {
         // other stuff
     }
 
-    public void fainted() {
-
+    public void takeDamage(int attack) {
+        this.currentHP -= attack;
     }
 
-    public void endBattle() {
-        // exp up... anything else?
+    public void heal() {
+        this.currentHP = this.hp;
     }
 }
