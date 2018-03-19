@@ -10,8 +10,6 @@ public abstract class Pokemon {
     public int level;
     public int exp;
 
-    public Moves[] moves;
-
     public int hp;
     public int att;
     public int def;
