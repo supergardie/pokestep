@@ -6,8 +6,8 @@ import java.util.Random;
  * Created by samantha on 18/03/18.
  */
 
-public class Charmander extends Pokemon {
-    Charmander() {
+public class PokeCharmander extends Pokemon {
+    PokeCharmander() {
         int randNum = 0;
         Random rand = new Random();
 
@@ -16,13 +16,23 @@ public class Charmander extends Pokemon {
 
         randNum = rand.nextInt(5) + 1;
         this.att = randNum;
+
+        randNum = rand.nextInt(5) + 1;
         this.def = randNum;
 
         randNum = rand.nextInt(6) + 10;
         this.hp = randNum;
+        this.currentHP = this.hp;
 
         randNum = rand.nextInt(9) + 2;
         this.level = randNum;
+    }
 
+    public void takeDamage(int attack) {
+        this.currentHP -= attack;
+    }
+
+    public void heal() {
+        this.currentHP = this.hp;
     }
 }

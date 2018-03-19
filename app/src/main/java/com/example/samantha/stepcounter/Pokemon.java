@@ -11,6 +11,7 @@ public abstract class Pokemon {
     public int exp;
 
     public int hp;
+    public int currentHP;
     public int att;
     public int def;
 
@@ -26,7 +27,7 @@ public abstract class Pokemon {
     }
 
     public void fainted() {
-        // something
+
     }
 
     public void endBattle() {
