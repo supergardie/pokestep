@@ -13,9 +13,15 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener {
     private boolean start = true;
+
     private TextView TvSteps;
     private TextView TvNotice;
     private TextView TvTotalSteps;
+
+    private Button BtnOne;
+    private Button BtnTwo;
+    private Button BtnThree;
+    private Button BtnAction;
 
     private StepDetector simpleStepDetector;
     private SensorManager sensorManager;
@@ -26,35 +32,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static final String TEXT_NUM_STEPS = "Number of Steps: ";
     private static final String TEXT_TOTAL_STEPS = "Total steps: ";
 
-    private String[] trainerTypes = {
-            "Biker",
-            "Bird Keeper",
-            "Blackbelt",
-            "Bug Catcher",
-            "Cooltrainer",
-            "Fisher",
-            "Hiker",
-            "Psychic",
-            "Rocker",
-            "Youngster"
-    };
-
-    private String[] trainerNames = {
-            "Joey",
-            "Claire",
-            "Ash",
-            "Misty",
-            "Brock",
-            "Joy",
-            "Oak",
-            "Sabrina",
-            "Gary",
-            "Erika"
-    };
-
     private Player player;
     private int numSteps;
     private int totalSteps = 0;
+    private int stepsToNextTown = 20;
     private int randNum;
     private int money = 0;
 
@@ -72,13 +53,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TvSteps = (TextView) findViewById(R.id.tv_steps);
         TvNotice = (TextView) findViewById(R.id.tv_notice);
         TvTotalSteps = (TextView) findViewById(R.id.tv_totalSteps);
-        final Button BtnStart = (Button) findViewById(R.id.btn_start);
-//        Button BtnStop = (Button) findViewById(R.id.btn_stop);
+        BtnAction = (Button) findViewById(R.id.btn_action);
+        BtnOne = (Button) findViewById(R.id.btn_one);
+        BtnTwo = (Button) findViewById(R.id.btn_two);
+        BtnThree = (Button) findViewById(R.id.btn_three);
 
         TvTotalSteps.setText(TEXT_TOTAL_STEPS + totalSteps);
 
 
-        BtnStart.setOnClickListener(new View.OnClickListener() {
+        BtnAction.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -89,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     TvNotice.setText("Hello " + player.name + "! You are starting with a " + player.pokemon[0].name + ".\n");
 
                     startCounter();
-                    BtnStart.setText("Next");
+                    BtnAction.setText("Next");
                 } else {
                     restartCounter();
                 }
@@ -130,13 +113,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void step(long timeNs) {
         numSteps++;
         totalSteps++;
+        stepsToNextTown--;
         TvSteps.setText(TEXT_NUM_STEPS +  numSteps);
         TvTotalSteps.setText(TEXT_TOTAL_STEPS + totalSteps);
     }
 
     public void checkForStepEvent() {
 
-        if(numSteps == randNum) {
+        if(stepsToNextTown == 0) {
+            foundCity();
+            sensorManager.unregisterListener(MainActivity.this);
+        } else if(numSteps == randNum) {
             if(numSteps % 2 == 0) {
                 battle();
             } else {
@@ -190,7 +177,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TvNotice.setText("You found an item!\nTap next!");
     }
 
+    /**
+     * What to do in cities? Heal, shop, gym, choose next destination.
+     */
     public void foundCity() {
+
+        BtnAction.setText("HEAL");
+        
+        BtnOne.setText("SHOP");
+        BtnOne.setVisibility(View.VISIBLE);
+
+        BtnTwo.setText("GYM");
+        BtnTwo.setVisibility(View.VISIBLE);
+
+        BtnThree.setText("DESTINATION");
+        BtnThree.setVisibility(View.VISIBLE);
+
+        TvNotice.setText("You're in NEWCITY City!");
+        stepsToNextTown = 20;
 
     }
 

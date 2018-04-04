@@ -6,7 +6,6 @@
     android:layout_height="match_parent">
 
 
-
     <TextView
         android:id="@+id/tv_steps"
         android:layout_width="match_parent"
@@ -14,13 +13,6 @@
         android:gravity="center"
         />
 
-
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        />
 
     <!--<Button-->
         <!--android:id="@+id/btn_stop"-->
@@ -42,5 +34,32 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         />
+
+    <Button
+        android:id="@+id/btn_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start" />
+
+    <Button
+        android:id="@+id/btn_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Heal"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btn_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gym"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btn_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Destination"
+        android:visibility="invisible" />
 
 </LinearLayout>
