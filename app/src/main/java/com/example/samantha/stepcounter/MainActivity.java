@@ -6,6 +6,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Player player;
     private int numSteps;
     private int totalSteps = 0;
-    private int stepsToNextTown = 20;
+    private int stepsBetweenTowns = 20;
+    private int stepsToNextTown = stepsBetweenTowns;
     private int randNum;
     private int money = 0;
 
@@ -54,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TvNotice = (TextView) findViewById(R.id.tv_notice);
         TvTotalSteps = (TextView) findViewById(R.id.tv_totalSteps);
         BtnAction = (Button) findViewById(R.id.btn_action);
-        BtnOne = (Button) findViewById(R.id.btn_one);
-        BtnTwo = (Button) findViewById(R.id.btn_two);
-        BtnThree = (Button) findViewById(R.id.btn_three);
+//        BtnOne = (Button) findViewById(R.id.btn_one);
+//        BtnTwo = (Button) findViewById(R.id.btn_two);
+//        BtnThree = (Button) findViewById(R.id.btn_three);
 
         TvTotalSteps.setText(TEXT_TOTAL_STEPS + totalSteps);
 
@@ -165,12 +167,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TvNotice.setText("A wild " + wildPokemon.name + " appeared!\n");
         TvNotice.append("HP: " + wildPokemon.hp + "\n");
         TvNotice.append("Level: " + wildPokemon.level + "\n");
-
-        if(player.pokemon[0].currentHP > 0 && wildPokemon.currentHP > 0) {
-            wildPokemon.takeDamage(player.pokemon[0].att);
-            TvNotice.append("Damage: " + player.pokemon[0].att);
-            TvNotice.append("HP: " + wildPokemon.currentHP);
-        }
     }
 
     public void foundItem() {
@@ -181,22 +177,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      * What to do in cities? Heal, shop, gym, choose next destination.
      */
     public void foundCity() {
-
-        BtnAction.setText("HEAL");
-        
-        BtnOne.setText("SHOP");
-        BtnOne.setVisibility(View.VISIBLE);
-
-        BtnTwo.setText("GYM");
-        BtnTwo.setVisibility(View.VISIBLE);
-
-        BtnThree.setText("DESTINATION");
-        BtnThree.setVisibility(View.VISIBLE);
-
-        TvNotice.setText("You're in NEWCITY City!");
-        stepsToNextTown = 20;
-
+        sensorManager.unregisterListener(MainActivity.this);
+        stepsToNextTown = stepsBetweenTowns;
+        TvNotice.setText("You found NEWCITY City!\nTap next!");
     }
+
 
 
     /***********************************************************************************************

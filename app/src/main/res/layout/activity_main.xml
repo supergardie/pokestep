@@ -40,26 +40,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Start" />
-
-    <Button
-        android:id="@+id/btn_one"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Heal"
-        android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/btn_two"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gym"
-        android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/btn_three"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Destination"
-        android:visibility="invisible" />
-
 </LinearLayout>

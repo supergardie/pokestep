@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CityActivity" />
+        <activity android:name=".ShopActivity" />
+        <activity android:name=".ItemsActivity" />
+        <activity android:name=".BattleActivity"></activity>
     </application>
 
 </manifest>
